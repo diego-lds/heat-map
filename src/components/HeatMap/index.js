@@ -21,7 +21,7 @@ const HeatMap = ({
                 latitudeExtractor={m => m[0]}
                 intensityExtractor={m => m[2]}
                 radius={30}
-                max={20}
+                max={10}
                 blur={10}
             />
             <TileLayer
