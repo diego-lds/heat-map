@@ -1,17 +1,19 @@
-import React, { Component } from 'react';
-import { Map, TileLayer } from 'react-leaflet';
+import React from 'react';
+import { Map, TileLayer, Marker, Popup } from 'react-leaflet';
 import HeatMapLayer from 'react-leaflet-heatmap-layer';
 import './style.css';
 
-
 const HeatMap = ({
+    center,
     points,
+    onClick,
 }) => {
+
     return (
         <Map
+            onClick={e => onClick(e)}
             className='leaflet-container'
-            center={[-27.5976, -48.5252]}
-            zoom={16}
+            center={center}
         >
             <HeatMapLayer
                 fitBoundsOnLoad
@@ -27,6 +29,9 @@ const HeatMap = ({
             <TileLayer
                 url='https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png'
             />
+            <Marker position={center} >
+                <Popup>Latitude: {center[0]}<br />Logitude: {center[1]}</Popup>
+            </Marker>
         </Map>
     )
 }
