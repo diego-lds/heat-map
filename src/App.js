@@ -39,9 +39,9 @@ const App = () => {
         residentsQuantity: parseInt(data.residentsQuantity),
         zipCode: data.zipCode
       })
-      fetchResidences();
       e.target.reset();
       toast.success('Cadastro realizado com sucesso!');
+      fetchResidences();
     } catch (e) {
       toast.error(`Erro ao cadastrar: [ ${e.message} ] `);
 
