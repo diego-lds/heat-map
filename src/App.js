@@ -1,21 +1,12 @@
 import React, { useEffect, useState } from 'react';
-import './App.css';
 import HeatMap from './components/HeatMap';
+import Panel from './components/Panel';
 import api from './api/residences';
+import idGenerator from './utils/idGenerator'
+import { ToastContainer, toast } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
+import './App.css';
 
-const addressPoints = [
-  [-27.5970, -48.5250, "8.0"],
-  [-27.5970, -48.5250, "1.0"],
-  [-27.5968, -48.5248, "2.0"],
-  [-27.5966, -48.5246, "3.0"],
-  [-27.5964, -48.5244, "4.0"],
-  [-27.5962, -48.5242, "5.0"],
-  [-27.5960, -48.5240, "6.0"],
-  [-27.5958, -48.5238, "7.0"],
-  [-27.5956, -48.5236, "8.0"],
-  [-27.5954, -48.5234, "9.0"],
-  [-27.5952, -48.5232, "10.0"],
-]
 const parsePoints = ({
   lat,
   lng,
@@ -25,18 +16,63 @@ const parsePoints = ({
 const App = () => {
 
   const [points, setPoints] = useState([]);
+  const [mapPosition, setMapPosition] = useState([-27.5974, -48.5263])
 
   useEffect(() => {
-    const fetchData = async () => {
-      const response = await api.get('/residences');
-      setPoints(response.data.map(parsePoints));
-    }
-    fetchData();
+    fetchResidences();
   }, [])
+
+  const fetchResidences = async () => {
+    const response = await api.get('/residences');
+    setPoints(response.data.map(parsePoints));
+  }
+
+  const onSubmit = async (data, e) => {
+    try {
+      await api.post('/residences', {
+        id: idGenerator(),
+        number: parseInt(data.number),
+        lat: parseFloat(data.lat),
+        lng: parseFloat(data.lng),
+        residentsQuantity: parseInt(data.residentsQuantity),
+        zipCode: data.zipCode
+      })
+      fetchResidences();
+      e.target.reset();
+      toast('Cadastro realizado com sucesso!');
+    } catch (e) {
+      console.log(e)
+    }
+  }
+
+  const handleClick = e => {
+    const {
+      lat,
+      lng
+    } = e.latlng;
+    setMapPosition([
+      Number.parseFloat(lat.toFixed(4)),
+      Number.parseFloat(lng.toFixed(4))
+    ])
+  }
 
   return (
     <>
-      <HeatMap points={points} />
+      <div className='container'>
+        <div className='panel'>
+          <Panel
+            onSubmit={onSubmit}
+            latLng={[mapPosition[0], mapPosition[1]]}
+          />
+        </div>
+        <div className='map'>
+          <HeatMap
+            points={points}
+            center={mapPosition}
+            onClick={handleClick}
+          />
+        </div>
+      </div>
     </>
   );
 }

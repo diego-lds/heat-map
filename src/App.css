@@ -1,0 +1,16 @@
+body{    
+   margin: 0;
+}
+.container{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+}
+.panel{
+    flex: 1;
+}
+
+.map{
+    flex: 4;
+}
+
