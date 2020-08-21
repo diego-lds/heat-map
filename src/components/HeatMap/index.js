@@ -6,12 +6,17 @@ import './style.css';
 const HeatMap = ({
     center,
     points,
-    onClick,
+    getPosition,
 }) => {
+
+    const gradient = {
+        0.1: '#89BDE0', 0.2: '#96E3E6', 0.4: '#82CEB6',
+        0.6: '#FAF3A5', 0.8: '#F5D98B', 1.0: '#DE9A96',
+    };
 
     return (
         <Map
-            onClick={e => onClick(e)}
+            onClick={e => getPosition(e.latlng)}
             className='leaflet-container'
             center={center}
         >
@@ -21,7 +26,8 @@ const HeatMap = ({
                 points={points}
                 longitudeExtractor={m => m[1]}
                 latitudeExtractor={m => m[0]}
-                intensityExtractor={m => m[2]}
+                intensityExtractor={m => parseFloat(m[2])}
+                gradient={gradient}
                 radius={30}
                 max={10}
                 blur={10}

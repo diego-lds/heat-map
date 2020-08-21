@@ -4,15 +4,20 @@ import { useForm } from 'react-hook-form';
 
 const Panel = ({
     onSubmit,
-    latLng,
+    markerPosition,
 }) => {
-    const { register, handleSubmit, errors, reset } = useForm();
+    const {
+        register,
+        handleSubmit,
+        errors
+    } = useForm();
 
     return (
         <div className='panel-container'>
             <h2>Cadastro de residências</h2>
             <form onSubmit={handleSubmit(onSubmit)}>
                 <div className='field'>
+                    <span>Cep</span>
                     <input
                         type='text'
                         placeholder='Cep'
@@ -31,25 +36,28 @@ const Panel = ({
                     />
                     {<label>{errors.zipCode && errors.zipCode.message}</label>}
                 </div>
+
                 <div className='field'>
+                    <span>Número</span>
                     <input
                         type='number'
                         placeholder='Número'
                         name='number'
                         ref={register({
-                            required: 'número da residência obrigatório',
+                            required: 'Número da residência obrigatório',
                         })}
                     />
                     {<label>{errors.number && errors.number.message}</label>}
-
                 </div>
 
                 <div className='field'>
+                    <span>Latitude (selecione no mapa)</span>
                     <input
                         type='text'
                         placeholder='Latitude'
                         name='lat'
-                        defaultValue={latLng[0]}
+                        value={markerPosition[0]}
+                        readOnly
                         ref={register({
                             required: 'Campo latitude obrigatório',
                             pattern: {
@@ -59,13 +67,14 @@ const Panel = ({
                         })}
                     />
                     {<label>{errors.lat && errors.lat.message}</label>}
-
                 </div>
 
                 <div className='field'>
+                    <span>Longitude (selecione no mapa)</span>
                     <input type='text'
                         placeholder='Longitude'
-                        defaultValue={latLng[1]}
+                        value={markerPosition[1]}
+                        readOnly
                         name='lng'
                         ref={register({
                             required: 'Campo longitude obrigatório',
@@ -79,22 +88,22 @@ const Panel = ({
                 </div>
 
                 <div className='field'>
+                    <span>Número de moradores</span>
                     <input
                         type='number'
                         placeholder='Número de moradores'
                         name='residentsQuantity'
                         ref={register({
                             required: 'Campo número de moradores obrigatório',
-                            minLength: {
+
+                            min: {
                                 value: 0,
                                 message: 'Residência deve ter ao menos um morador'
                             },
                         })}
                     />
                     {<label>{errors.residentsQuantity && errors.residentsQuantity.message}</label>}
-
                 </div>
-
                 <input type='submit' value='Salvar' className='submit-button' />
             </form>
         </div >

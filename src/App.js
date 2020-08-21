@@ -5,15 +5,9 @@ import Toast from './components/Toast';
 import api from './api/residences';
 import idGenerator from './utils/idGenerator'
 import { toast } from 'react-toastify';
-
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
-
-const parsePoints = ({
-  lat,
-  lng,
-  residentsQuantity
-}) => ([lat, lng, parseFloat(residentsQuantity)]);
+import parserPoints from './utils/parserPoints';
 
 const App = () => {
 
@@ -25,8 +19,12 @@ const App = () => {
   }, [])
 
   const fetchResidences = async () => {
-    const response = await api.get('/residences');
-    setPoints(response.data.map(parsePoints));
+    try {
+      const response = await api.get('/residences');
+      setPoints(response.data.map(parserPoints));
+    } catch (e) {
+      toast.error('Erro ao baixar os dados!')
+    }
   }
 
   const onSubmit = async (data, e) => {
@@ -44,18 +42,14 @@ const App = () => {
       fetchResidences();
     } catch (e) {
       toast.error(`Erro ao cadastrar: [ ${e.message} ] `);
-
     }
   }
 
-  const handleClick = e => {
-    const {
-      lat,
-      lng
-    } = e.latlng;
+  const getPosition = position => {
+    console.log(position.lat, position.lng)
     setMapPosition([
-      Number.parseFloat(lat.toFixed(4)),
-      Number.parseFloat(lng.toFixed(4))
+      Number.parseFloat(position.lat.toFixed(4)),
+      Number.parseFloat(position.lng.toFixed(4))
     ])
   }
 
@@ -65,7 +59,7 @@ const App = () => {
         <div className='panel'>
           <Panel
             onSubmit={onSubmit}
-            latLng={[mapPosition[0], mapPosition[1]]}
+            markerPosition={[mapPosition[0], mapPosition[1]]}
           />
           <Toast />
         </div>
@@ -73,7 +67,7 @@ const App = () => {
           <HeatMap
             points={points}
             center={mapPosition}
-            onClick={handleClick}
+            getPosition={getPosition}
           />
         </div>
       </div>

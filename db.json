@@ -255,6 +255,110 @@
       "lng": -48.528,
       "residentsQuantity": 3,
       "zipCode": "91770040"
+    },
+    {
+      "id": "45955060159903605",
+      "number": 12,
+      "lat": -27.5961,
+      "lng": -48.5263,
+      "residentsQuantity": 3,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "9268492821165772",
+      "number": 1,
+      "lat": -27.5969,
+      "lng": -48.528,
+      "residentsQuantity": -10,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "7473672444564308",
+      "number": 123,
+      "lat": -27.5969,
+      "lng": -48.528,
+      "residentsQuantity": 1,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "6285963130078498",
+      "number": 9,
+      "lat": -27.5971,
+      "lng": -48.5275,
+      "residentsQuantity": 1,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "5421346556739783",
+      "number": 1,
+      "lat": -27.5968,
+      "lng": -48.5282,
+      "residentsQuantity": 3,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "5162821974136642",
+      "number": 355,
+      "lat": -27.5974,
+      "lng": -48.5306,
+      "residentsQuantity": 8,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "6801689777109168",
+      "number": 123,
+      "lat": -27.5974,
+      "lng": -48.5306,
+      "residentsQuantity": 2,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "4826413732282131",
+      "number": 123,
+      "lat": -27.5974,
+      "lng": -48.5306,
+      "residentsQuantity": 3,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "36816175974461807",
+      "number": 123,
+      "lat": -27.5962,
+      "lng": -48.5312,
+      "residentsQuantity": 10,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "8432805232323033",
+      "number": 1,
+      "lat": -27.596,
+      "lng": -48.529,
+      "residentsQuantity": 1,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "9026778124271315",
+      "number": 1,
+      "lat": -27.5974,
+      "lng": -48.5263,
+      "residentsQuantity": 112,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "6849392570717487",
+      "number": 1,
+      "lat": -27.5966,
+      "lng": -48.5293,
+      "residentsQuantity": 9,
+      "zipCode": "91770040"
+    },
+    {
+      "id": "5060239400473499",
+      "number": 3,
+      "lat": -27.5975,
+      "lng": -48.5293,
+      "residentsQuantity": 100,
+      "zipCode": "91770040"
     }
   ]
 }
