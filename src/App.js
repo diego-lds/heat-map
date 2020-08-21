@@ -1,9 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import HeatMap from './components/HeatMap';
 import Panel from './components/Panel';
+import Toast from './components/Toast';
 import api from './api/residences';
 import idGenerator from './utils/idGenerator'
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
+
 import 'react-toastify/dist/ReactToastify.css';
 import './App.css';
 
@@ -39,9 +41,10 @@ const App = () => {
       })
       fetchResidences();
       e.target.reset();
-      toast('Cadastro realizado com sucesso!');
+      toast.success('Cadastro realizado com sucesso!');
     } catch (e) {
-      console.log(e)
+      toast.error(`Erro ao cadastrar: [ ${e.message} ] `);
+
     }
   }
 
@@ -64,6 +67,7 @@ const App = () => {
             onSubmit={onSubmit}
             latLng={[mapPosition[0], mapPosition[1]]}
           />
+          <Toast />
         </div>
         <div className='map'>
           <HeatMap
